@@ -47,34 +47,33 @@ class TimeUI extends PluginBase implements Listener {
 
     public function setTime($sender) {
         $formAPI = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $fromAPI->createSimpleForm(function (Player $sender, int $data = null) {
-            $result = $data;
-            if ($result === null) {
-                return true;
-            }
-            switch ($result) {
-                case 0:
-                    $sender->getLevel()->setTime(0);
-                    $sender->sendMessage("[TimeUI] Successfully set time to day");
-                    $sender->addTitle("Changed time to day");
-                    break;
-                case 1:
-                    $sender->getLevel()->setTime(15000);
-                    $sender->sendMessage("[TimeUI] Successfully set time to night");
-                    $sender->addTitle("Changed time to night");
-                    break;
-                case 2:
-                    $this->openMenu($sender);
-                    break;
-            }
-            $form->setTitle("TimeUI");
-            $form->setContent("Select time:");
-            $form->addButton("Day");
-            $form->addButton("Night");
-            $form->addButton("Back");
-            $form->sendToPlayer($sender);
-            return $form;
+        $form = $fromAPI->createSimpleForm(function (Player $sender, int $data = null);
+        $result = $data;
+        if ($result === null) {
+            return true;
         }
+        switch ($result) {
+            case 0:
+                $sender->getLevel()->setTime(0);
+                $sender->sendMessage("[TimeUI] Successfully set time to day");
+                $sender->addTitle("Changed time to day");
+                break;
+            case 1:
+                $sender->getLevel()->setTime(15000);
+                $sender->sendMessage("[TimeUI] Successfully set time to night");
+                $sender->addTitle("Changed time to night");
+                break;
+            case 2:
+                $this->openMenu($sender);
+                break;
+        }
+        $form->setTitle("TimeUI");
+        $form->setContent("Select time:");
+        $form->addButton("Day");
+        $form->addButton("Night");
+        $form->addButton("Back");
+        $form->sendToPlayer($sender);
+        return $form;
     }
 
 }
