@@ -37,6 +37,7 @@ class TimeUI extends PluginBase implements Listener {
                         $sender->sendMessage("You do not have the permission to use this command");
                         return true;
                     }
+                    return false;
                 } else {
                     $sender->sendMessage("Please use this command in-game");
                     return true;
