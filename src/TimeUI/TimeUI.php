@@ -54,7 +54,7 @@ class TimeUI extends PluginBase implements Listener {
             switch ($result) {
                 case 0:
                     $sender->getLevel()->setTime(0);
-                    $sender->sendMessage("[TimeUI]  day");
+                    $sender->sendMessage("[TimeUI] Successfully set time to day");
                     $sender->addTitle("Changed time to day");
                     break;
                 case 1:
