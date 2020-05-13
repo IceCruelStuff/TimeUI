@@ -1,0 +1,17 @@
+name: TimeUI
+main: TimeUI\TimeUI
+version: 1.0.0
+api: 3.0.0
+load: STARTUP
+author: IceCruelStuff
+
+commands:
+    timeui:
+        description: "TimeUI command"
+        permission: timeui.command
+        usage: "/timeui"
+
+permissions:
+    timeui.command:
+        default: op
+        description: "Permission for TimeUI command"
