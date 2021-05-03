@@ -63,14 +63,14 @@ class TimeUI extends PluginBase implements Listener {
                 case 2:
                     break;
             }
-        }
+        });
         $form->setTitle("TimeUI");
         $form->setContent("Select time:");
         $form->addButton("Day");
         $form->addButton("Night");
         $form->addButton("Back");
         $form->sendToPlayer($sender);
-        return $form;
+        // return $form;
     }
 
 }
