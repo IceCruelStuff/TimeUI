@@ -12,18 +12,17 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 use pocketmine\Player;
 use pocketmine\Server;
-
 use jojoe77777\FormAPI\SimpleForm;
 use jojoe77777\FormAPI;
 
 class TimeUI extends PluginBase implements Listener {
 
     public function onEnable() : void {
-        $this->getLogger()->info(TextFormat::GREEN . "TimeUI has been enabled");
+        // $this->getLogger()->info(TextFormat::GREEN . "TimeUI has been enabled");
     }
 
     public function onDisable() : void {
-        $this->getLogger()->info(TextFormat::RED . "TimeUI has been disabled");
+        // $this->getLogger()->info(TextFormat::RED . "TimeUI has been disabled");
     }
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool {
@@ -31,41 +30,39 @@ class TimeUI extends PluginBase implements Listener {
             case "timeui":
                 if ($sender instanceof Player) {
                     if ($sender->hasPermission("timeui.command")) {
-                        $this->timeSet($sender);
+                        $this->openUI($sender);
                         return true;
                     } else {
-                        $sender->sendMessage("You do not have the permission to use this command");
-                        return true;
+                        $sender->sendMessage(TextFormat::RED . "You do not have the permission to use this command");
                     }
-                    return false;
                 } else {
-                    $sender->sendMessage("Please use this command in-game");
-                    return true;
+                    $sender->sendMessage(TextFormat::RED . "Please use this command in-game");
                 }
+                break;
         }
+        return false;
     }
 
-    public function setTime($sender) {
-        $formAPI = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $fromAPI->createSimpleForm(function (Player $sender, int $data = null);
-        $result = $data;
-        if ($result === null) {
-            return true;
-        }
-        switch ($result) {
-           case 0:
-                $sender->getLevel()->setTime(0);
-                $sender->sendMessage("[TimeUI] Successfully set time to day");
-                $sender->addTitle("Changed time to day");
-                break;
-            case 1:
-                $sender->getLevel()->setTime(15000);
-                $sender->sendMessage("[TimeUI] Successfully set time to night");
-                $sender->addTitle("Changed time to night");
-                break;
-            case 2:
-                $this->openMenu($sender);
-                break;
+    public function openUI($sender) {
+        $form = new SimpleForm(function (Player $sender, int $data = null) {
+            $result = $data;
+            if ($result === null) {
+                return;
+            }
+            switch ($result) {
+               case 0:
+                    $sender->getLevel()->setTime(0);
+                    $sender->sendMessage(TextFormat::GREEN . "[TimeUI] Successfully set time to day");
+                    $sender->addTitle(TextFormat::GREEN . "Changed time to day");
+                    break;
+                case 1:
+                    $sender->getLevel()->setTime(15000);
+                    $sender->sendMessage(TextFormat::GREEN . "[TimeUI] Successfully set time to night");
+                    $sender->addTitle(TextFormat::GREEN . "Changed time to night");
+                    break;
+                case 2:
+                    break;
+            }
         }
         $form->setTitle("TimeUI");
         $form->setContent("Select time:");
